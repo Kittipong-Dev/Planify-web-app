@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import BoardSection from './BoardSection';
-import Calendar from './Calendar';
+import BoardSection from './Boards/BoardSection';
+import Calendar from './Misc/Calendar';
 import Task from '../../Task';
 import SettingsPopup from './Settings';
 import ProjectSection from './ProjectSection';
 import ConfirmationPopup from './ConfirmationPopup';
 import TaskLabel from './TaskLabel';
-import List from './List';
+import List from './Working Area/List';
 import Member from './Member';
 import Sidebar from './Sidebar'; // Assuming Sidebar.jsx exists
 
@@ -40,7 +40,6 @@ const Interface = ({ user }) => {
         {showLabelPopup && <TaskLabel />}
 
         {/* Task List and Member Components */}
-        <List />
         <Member members={[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]} />
       </main>
     </div>

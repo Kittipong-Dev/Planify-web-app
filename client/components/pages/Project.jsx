@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { DiscordSDK } from '@discord/embedded-app-sdk';
 import Interface from '../Interface.jsx';
-import Calendar from '../Calendar.jsx';
+import Calendar from '../Misc/Calendar.jsx';
 import Task from '../../../Task.jsx';
-import Board from '../BoardSection.jsx';
 import SettingsPopup from '../Settings.jsx';
-import ProjectSection from '../ProjectSection.jsx';
 import ConfirmationPopup from '../ConfirmationPopup.jsx';
 import TaskLabel from '../TaskLabel.jsx';
-import BoardProject from '../BoardProject.jsx';
-import List from '../List.jsx';
+import BoardProject from '../Boards/BoardProject.jsx';
+import List from '../Working Area/List.jsx';
 import Member from '../Member.jsx';
 import ErrorBoundary from '/ErrorBoundary.jsx';
 import '/styles/sidebar.css';
@@ -50,7 +48,7 @@ const Project = () => {
         console.log('Authorization code received...');
 
         // Exchange authorization code for access token
-        const response = await fetch('/.proxy/api/v1/token', {
+        const response = await fetch('/.proxy/api/api/v1/token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code }),
@@ -80,6 +78,9 @@ const Project = () => {
         setDiscordSdk(sdk);
       } catch (error) {
         console.error('Error setting up Discord SDK:', error);
+        setUser({
+          username: "placeholder",
+          avatarUrl: ""})
       }
     };
 
@@ -107,24 +108,25 @@ const Project = () => {
 
   return (
     <div id="app">
-      <Interface user={user} />
-      <Task />
-      <SettingsPopup />
-      <ConfirmationPopup
-        isVisible={isConfirmationVisible}
-        onConfirm={handleConfirmation}
-        onCancel={() => setIsConfirmationVisible(false)}
-      />
-      <TaskLabel
-        isVisible={labelPopupVisible}
-        onLabelSelect={(label) => console.log('Selected label:', label)}
-        onClose={() => setLabelPopupVisible(false)}
-      />
       <ErrorBoundary>
+        <Interface user={user}/>
+        <Task />
+        <SettingsPopup />
+        <ConfirmationPopup
+          isVisible={isConfirmationVisible}
+          onConfirm={handleConfirmation}
+          onCancel={() => setIsConfirmationVisible(false)}
+        />
+        <TaskLabel
+          isVisible={labelPopupVisible}
+          onLabelSelect={(label) => console.log('Selected label:', label)}
+          onClose={() => setLabelPopupVisible(false)}
+        />
+
         <BoardProject />
+        {/* Task List and Member Components */}
+        <Member members={[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]} />
       </ErrorBoundary>
-      <List />
-      <Member members={[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]} />
     </div>
   );
 };

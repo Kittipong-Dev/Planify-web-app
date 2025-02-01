@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '/styles/board.css'; 
-import ConfirmationPopup from './ConfirmationPopup'; 
+import ConfirmationPopup from '../ConfirmationPopup'; 
 
 export function BoardSection({ projectId, boards, setBoards, activeBoard, setActiveBoard }) {
   const [popupVisible, setPopupVisible] = useState(false);

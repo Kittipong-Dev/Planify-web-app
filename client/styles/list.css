@@ -1,6 +1,5 @@
 /* list.css */
-#add-list-button {
-  position: absolute; /* Allow precise positioning */
+.add-list-button {
   top: 19vh; /* Align vertically */
   margin-right: 30px; /* Ensure 30px gap from the right edge */
   width: 270px;
@@ -11,20 +10,24 @@
   border: none;
   border-radius: 12px; /* Rounded corners */
   padding: 14px 16px; /* Button padding */
-  font-size: 16px; /* Text size */
   cursor: pointer; /* Pointer cursor */
   outline: none;
 }
 
+.delete-button {
+  background-color: #e42020; /* Gray background */
+  color: #fcfcfc;
+}
 
-#add-list-button:hover {
+
+.add-list-button:hover {
   background-color: #565B63; /* Slightly darker on hover */
   color: white;
 }
 
 /* Responsive behavior */
 @media (max-width: 768px) {
-  #list-container {
+  .list-container {
     top: 10vh; /* Adjust position for smaller screens */
     left: 5vw; /* Reduce left margin */
     gap: 12px; /* Decrease gap between lists */
@@ -42,7 +45,7 @@
 }
 
 /* Container for all lists */
-#list-container {
+.list-container {
   position: absolute;
   top: 19vh;
   left: 27vw;
@@ -271,6 +274,12 @@
 .add-list-input::placeholder {
   color: #949AA0;
 }
+
+.add-list-form {
+  display: flex; /* Enable horizontal alignment */
+  gap: 5px;
+}
+
 .rename-list {
   display: flex;
   flex-direction: column;
@@ -299,6 +308,7 @@
   justify-content: center;
   text-align: center;
   margin-top: 15px;
+  
 }
 .cancel-rename-button {
   color: white;

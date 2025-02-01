@@ -35,7 +35,6 @@
       const handleProjectClick = (project) => {
         console.log('project id :',project.id)
         setActiveProject(project);
-        setSelectedProject(project); // Update selected project
       };
 
       return (

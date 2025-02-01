@@ -1,0 +1,12 @@
+.working-area {
+    position: fixed;
+    top: 0;
+    left: 22vw;
+    width: 80vw;
+    /* 1/5 of the screen width */
+    height: 5vh;
+    /* Full height of the screen */
+    background-color: #1C2025;
+    padding: 16px;
+    z-index: 1;
+}
