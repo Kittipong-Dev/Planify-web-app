@@ -1,0 +1,24 @@
+.offsetComponent {
+    margin-left: 22vw;
+    padding: 20px;
+    display: flex;
+    width: 72vw;
+    justify-content: space-between;
+}
+
+.offsetComponent > .front{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title{
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+
+.offsetComponent > .back{
+    display: flex;
+    gap: 20px;
+}

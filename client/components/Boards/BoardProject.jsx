@@ -3,8 +3,9 @@ import '/styles/project.css';
 import '/styles/sidebar.css';
 import '/styles/board.css';
 import BoardSection from './BoardSection';
-import ProjectSection from '../ProjectSection';
+import ProjectSection from './ProjectSection';
 import List from '../Working Area/List'
+import TopBarBoardPanel from '../Working Area/TopBarBoardPanel'
 
 //good job
 const BoardProject = () => {
@@ -61,6 +62,7 @@ const BoardProject = () => {
 
   return (
     <div id="main-container">
+      <TopBarBoardPanel BoardName={activeBoard.name} BoardDesc={activeBoard.description}/>
       {/* Project Box */}
       <div id="project-container" className="clickable" onClick={toggleSection}>
         <div id={`project-box-${activeProject ? activeProject.id : 'none'}`} className="projectbox">
@@ -145,6 +147,7 @@ const BoardProject = () => {
           </>
         ) : (
           <div className='please-create-project' id='please-create-project'>
+            <br/>
             Please Create Project
           </div>
         )

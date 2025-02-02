@@ -3,7 +3,7 @@ import BoardSection from './Boards/BoardSection';
 import Calendar from './Misc/Calendar';
 import Task from '../../Task';
 import SettingsPopup from './Settings';
-import ProjectSection from './ProjectSection';
+import ProjectSection from './Boards/ProjectSection';
 import ConfirmationPopup from './ConfirmationPopup';
 import TaskLabel from './TaskLabel';
 import List from './Working Area/List';

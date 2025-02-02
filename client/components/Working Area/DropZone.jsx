@@ -8,6 +8,7 @@ export function Droppable(props) {
   });
   const style = {
     opacity: isOver ? 0.9 : 1,
+    "z-index": -1,
   };
 
   return (

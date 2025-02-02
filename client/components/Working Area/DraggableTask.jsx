@@ -9,7 +9,9 @@ function Draggable(props) {
   const style = {
     // Outputs `translate3d(x, y, 0)`
     transform: CSS.Translate.toString(transform),
+    "z-index": 100,
   };
+  console.log(props)
 
   return (
     <button ref={setNodeRef} style={style} {...listeners} {...attributes}>

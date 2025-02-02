@@ -2,7 +2,8 @@
     import { v4 as uuidv4 } from 'uuid';
     import '/styles/popup.css';
     import '/styles/project.css';
-    import ConfirmationPopup from './ConfirmationPopup';
+    import ConfirmationPopup from '../ConfirmationPopup';
+    
 
     export function ProjectSection({ projects, setProjects, activeProject, setActiveProject, setSelectedProject }) {
       const [popupVisible, setPopupVisible] = useState(false);

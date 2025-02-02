@@ -69,9 +69,19 @@
   flex-direction: column;
   gap: 12px;
   flex-shrink: 0; /* Prevent shrinking */
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tasks > button {
+  background-color: #3E4147;
+  font-weight: 400;
+}
 
 /* List title styling */
 .list-title {
@@ -160,7 +170,14 @@
   color: white;
   outline: none;
 }
-/* Add Task button inside the list */
+
+.add-task > input{
+  background: transparent; 
+  border: none; 
+  color: white; 
+  width: 100px;
+}
+/* Add Task button inside the list */ /*note: unused*/
 .add-task-button {
   background-color: #33363B; /* Gray background */
   color: white; /* White text color */

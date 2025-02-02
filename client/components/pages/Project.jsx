@@ -16,8 +16,7 @@ import '/styles/sidebar.css';
 const Project = () => {
   const [discordSdk, setDiscordSdk] = useState(null);
   const [user, setUser] = useState(null);
-  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
-  const [labelPopupVisible, setLabelPopupVisible] = useState(false);
+
 
   useEffect(() => {
     const setupDiscordSdk = async () => {
@@ -101,6 +100,10 @@ const Project = () => {
     setIsConfirmationVisible(false);
   };
 
+  const handleSettings = () => {
+    console.log("hi")
+  };
+
   if (!user) {
     console.log('User data is still loading...');
     return <div>Loading...</div>;
@@ -111,17 +114,6 @@ const Project = () => {
       <ErrorBoundary>
         <Interface user={user}/>
         <Task />
-        <SettingsPopup />
-        <ConfirmationPopup
-          isVisible={isConfirmationVisible}
-          onConfirm={handleConfirmation}
-          onCancel={() => setIsConfirmationVisible(false)}
-        />
-        <TaskLabel
-          isVisible={labelPopupVisible}
-          onLabelSelect={(label) => console.log('Selected label:', label)}
-          onClose={() => setLabelPopupVisible(false)}
-        />
 
         <BoardProject />
         {/* Task List and Member Components */}
