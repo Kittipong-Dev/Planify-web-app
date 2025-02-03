@@ -59,6 +59,7 @@ const Project = () => {
 
         const { access_token } = await response.json();
         console.log('Access Token received...');
+        window.token = access_token // unsafe but yeah 
 
         // Authenticate with Discord SDK using the access token
         await sdk.commands.authenticate({ access_token });

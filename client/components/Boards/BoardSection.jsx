@@ -27,6 +27,19 @@ export function BoardSection({ projectId, boards, setBoards, activeBoard, setAct
         ...prevBoards,
         [projectId]: [...(prevBoards[projectId] || []), newBoardData],
       }));
+      const newBoardDat = {
+        name: newBoard.name,
+        description: newBoard.description,
+      };
+      fetch(`/.proxy/api/api/v1/projects/${projectId}/boards`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + window.token,
+          body: JSON.stringify(newBoardDat)
+        },
+
+      }).catch(e => console.log(e));
       resetPopupOverlay();
     } else {
       alert('Please enter a board name.');
