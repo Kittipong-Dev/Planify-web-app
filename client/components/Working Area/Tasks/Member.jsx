@@ -20,8 +20,9 @@ const Member = ({ members, onMemberSelect, isVisible, selectedMember }) => {
               onClick={() => handleMemberClick(member)}
             >
               {/* bad practise but i dont have time*/}
+              
               <img
-                src={member.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&color=fff`}
+                src={member.profilePicture || `https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.png`}
                 alt={member.name}
                 className="member-profile-picture"
               />

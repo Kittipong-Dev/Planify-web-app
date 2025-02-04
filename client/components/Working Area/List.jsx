@@ -8,7 +8,7 @@ import '/styles/list.css';
 import TaskPopup from './Tasks/TaskPopup';
 import TaskDetails from './Tasks/TaskComponent';
 
-const List = ({ lists, setLists, members }) => {
+const List = ({ lists, activeBoardId, activeProjectId, setLists, members }) => {
   const [newListName, setNewListName] = useState('');
   const [isAddingList, setIsAddingList] = useState(false);
   const [popupVisible, setPopupVisible] = useState(false);
@@ -25,6 +25,30 @@ const List = ({ lists, setLists, members }) => {
       name: newListName,
       tasks: [],
     };
+
+    const postList = {
+      name: newListName,
+      order: (lists.length??0)+1,
+    };
+
+    fetch(`/.proxy/api/api/v1/projects/${activeProjectId}/boards/${activeBoardId}/lists`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + window.token,
+        
+      },
+      body: JSON.stringify(postList)
+
+    }).then(x => x.json()).then(x => {
+      const newList2 = {
+        id: x.listId,
+        name: newListName,
+        tasks: [],
+      };
+      setLists([...lists, newList2]);
+    })
+    .catch(e => console.log(e));
 
     setLists([...lists, newList]);
     setNewListName('');
@@ -45,8 +69,46 @@ const List = ({ lists, setLists, members }) => {
         }
         : list
     )
+    const list = dat.find(x =>
+      x.id==listId
+    )
+
     if (!suppressUpdate) {
-      setLists(result)
+      
+      //{"name":"sepi","details":"rara ah ah ah umma gagaga lala uwawa","startDate":"2025-01-26","dueDate":"2025-07-26","assignedMember":{"id":1,"name":"Alice"},"label":6}
+      const postcard = { // haha postcard
+        "listId": listId,
+        "name": taskData.name,
+        "description": taskData.details,
+        "styleId": taskData.label,
+        "startDate": taskData.startDate,
+        "endDate": taskData.dueDate,
+        "reminderDaysInterval": 1,
+        "assignedTo": [taskData.assignedMember.id],
+        "files": [],
+        "order": (list.length??0)+1
+      }
+      fetch(`/.proxy/api/api/v1/projects/${activeProjectId}/boards/${activeBoardId}/lists/${listId}/cards`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + window.token,
+          
+        },
+        body: JSON.stringify(postcard)
+
+      }).then(x => x.json()).then(x => {
+        const result2 = dat.map((list) =>
+          list.id === listId
+            ? {
+              ...list,
+              tasks: [...list.tasks, { id: x.cardId, name: taskData }],
+            }
+            : list
+        )
+        setLists(result2)
+      })
+      .catch(e => {console.log(e);setLists(result)});
     }
     return result
   };
@@ -62,6 +124,14 @@ const List = ({ lists, setLists, members }) => {
     if (!suppressUpdate) {
       setLists(result)
     }
+    fetch(`/.proxy/api/api/v1/projects/${activeProjectId}/boards/${activeBoardId}/lists/${listId}/cards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + window.token,
+      }
+
+    }).catch(e => console.log(e));
 
     return result
   };

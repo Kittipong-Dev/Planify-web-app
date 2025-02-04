@@ -38,8 +38,9 @@ export function ProjectSection({ projects, setProjects, activeProject, setActive
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + window.token,
-          body: JSON.stringify(newProjectDat)
+          
         },
+        body: JSON.stringify(newProjectDat)
 
       }).catch(e => console.log(e));
     } else {

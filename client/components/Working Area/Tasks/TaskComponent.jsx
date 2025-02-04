@@ -7,7 +7,7 @@ function TaskDetails({ taskName, startDate, dueDate, color, users }) {
             <div className="task-details">
                 <div className="title">{taskName}</div>
                 <div className="task-footer">
-                    <div className="date-range">{startDate + " - " + dueDate}</div>
+                    <div className="date-range">{new Date(startDate).toLocaleDateString("en-US") + " - " + new Date(dueDate).toLocaleDateString("en-US")}</div>
                     <div className="user-profiles">
                         {[users].map((profile, index) => (
                             <div key={index} className="user-profile"></div>

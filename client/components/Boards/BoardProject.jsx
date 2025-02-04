@@ -58,7 +58,7 @@ const BoardProject = (members) => {
       }
       ).catch(e => console.log(e));
 
-      /*if (activeBoard) {
+      if (activeBoard) {
         fetch(`/.proxy/api/api/v1/projects/${activeProject.id}/boards/${activeBoard.id}/lists?page=1&limit=10`, {
           method: 'GET',
           headers: {
@@ -69,37 +69,51 @@ const BoardProject = (members) => {
           d.json()
         ).then(d => {
           console.log("updating board", d.data)
-          const listdat = d.data.map(x => { return { ...x, id: x.listId, listId: undefined } })
-          const tasksdat = Promise.all(
-            listdat.map(async (i) => await (await fetch(`/.proxy/api/api/v1/projects/${activeProject.id}/boards/${activeBoard.id}/lists/${i.id}/cards?page=1&limit=10`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + window.token,
-              },
-            })).json())
-          )
-          setTasks({
-            ...boards, // everything else retain
-            [activeProject.id]: {
-              ...boards[activeProject.id],
-              [activeBoard.id]: tasksdat // update current
-            }
-          })
+          const listdat = d.data.map(x => { return { ...x, id: x.listId, listId: undefined, tasks: [] } })
+          console.log("updating board1", d.data,members)
+          Promise.all(
+            listdat.map(async (i) => {
+              return {
+                ...i, tasks: ((await (await fetch(`/.proxy/api/api/v1/projects/${activeProject.id}/boards/${activeBoard.id}/lists/${i.id}/cards?page=1&limit=10`, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + window.token,
+                  },
+                })).json()).data??[]).map(x=>{return{id:x.cardId ,name:{name:x.name,details:"",startDate:x.startDate,dueDate:x.endDate,label:x.styleId,assignedMember:members.members.find(y=>x.assignedTo.includes(y.id))}}})
+              }
+            })
+          ).then((tasksdat => {
+            console.log("updating board2", d.data)
+            console.log({
+              ...tasks, // everything else retain
+              [activeProject.id]: {
+                ...tasks[activeProject.id],
+                [activeBoard.id]: tasksdat // update current
+              }
+            })
+            setTasks({
+              ...tasks, // everything else retain
+              [activeProject.id]: {
+                ...tasks[activeProject.id],
+                [activeBoard.id]: tasksdat // update current
+              }
+            })
+          }))
         }
         ).catch(e => console.log(e));
-      }*/
+      }
     }
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     fetchData()
   }, []) // on load
 
-  /*useEffect(() => {
+  useEffect(() => {
     fetchData()
-  }, [activeBoard,activeProject]) // on load
-  */
+  }, [activeBoard, activeProject]) // on load
+
 
   useEffect(() => {
     // First, we need to create an instance of EventSource and pass the data stream URL as a
@@ -213,6 +227,8 @@ const BoardProject = (members) => {
               <>
                 <TopBarBoardPanel BoardName={activeBoard.name} BoardDesc={activeBoard.description} />
                 <List
+                  activeBoardId={activeBoard.id}
+                  activeProjectId={activeProject.id}
                   lists={tasks?.[activeProject.id]?.[activeBoard.id] || []}
                   setLists={(val) => setTasks((prevTasks) => {
                     const K = {
@@ -224,7 +240,7 @@ const BoardProject = (members) => {
                     }
                     return K
                   }
-                  
+
                   )}
                   members={members}
                 />

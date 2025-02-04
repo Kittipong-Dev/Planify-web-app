@@ -9,7 +9,8 @@ import '/styles/sidebar.css';
 const Project = () => {
   const [discordSdk, setDiscordSdk] = useState(null);
   const [user, setUser] = useState(null);
-
+  const [members,setMembers]=useState([{ id: "648459618963554314", name: 'Achi' , avatar:"9a63d2375b9fa5cd8c34aef086635a23"}, { id: "791173089697464400", name: 'Avicii' , avatar:"cf23f00eed64b8d04564eb367b00468b" }])
+  const [memberToBe,_] = useState([648459618963554314,791173089697464400])
 
   useEffect(() => {
     const setupDiscordSdk = async () => {
@@ -68,6 +69,10 @@ const Project = () => {
           avatarUrl: `https://cdn.discordapp.com/avatars/${userProfile.id}/${userProfile.avatar}.png`,
         });
 
+        //const mem = await Promise.all(memberToBe.map(async(id)=> await (await fetch(`https://discord.com/api/v9/users/${id}`)).json()))
+        //console.log(mem)
+        //setMembers(mem.map(x=>{return{id:x.id,name:x.username,avatar:x.avatar}}))
+
         setDiscordSdk(sdk);
       } catch (error) {
         console.error('Error setting up Discord SDK:', error);
@@ -108,8 +113,10 @@ const Project = () => {
       <ErrorBoundary>
         <Interface user={user}/>
         
+        {/* /api/v1/project/{projectId}/members */}
 
-        <BoardProject  members={[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]}/>
+        users/
+        <BoardProject  members={members}/>
         {/* Task List and Member Components */}
       </ErrorBoundary>
     </div>

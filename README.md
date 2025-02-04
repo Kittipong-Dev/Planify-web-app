@@ -4,10 +4,12 @@ This template is used in the [Building An Activity](https://discord.com/develope
 
 Read more about building Discord Activities with the Embedded App SDK at [https://discord.com/developers/docs/activities/overview](https://discord.com/developers/docs/activities/overview).
 
-# installation
-WIP
+# Installation
+cd ./client
+npm i
 
-run
-npm run dev in ./server and ./client
-cloudflared tunnel --url http://localhost:5173
-then fix the discord app and vite.config.js
+## Running local server
+npm run dev
+
+## Deploy to ghpages
+npm run deploy
