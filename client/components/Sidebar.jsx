@@ -19,7 +19,7 @@ const Sidebar = ({ user }) => {
           <span id="username">{user.username}</span>
         </div>
         <div className='logo' id='logo'>
-          <img alt='Planify'></img>
+          <img alt=''></img>
         </div>  
       </div>
     </div>

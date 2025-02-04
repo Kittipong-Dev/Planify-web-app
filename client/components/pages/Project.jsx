@@ -4,7 +4,7 @@ import Interface from '../Interface.jsx';
 import BoardProject from '../Boards/BoardProject.jsx';
 import ErrorBoundary from '/ErrorBoundary.jsx';
 import '/styles/sidebar.css';
-
+import logo from '../../assets/Planifylogo.png'
 
 const Project = () => {
   const [discordSdk, setDiscordSdk] = useState(null);
@@ -111,6 +111,7 @@ const Project = () => {
   return (
     <div id="app">
       <ErrorBoundary>
+        <img src={logo} width="100" height="45" style={{position:"fixed",top:10,left:10,zIndex:10000}} />
         <Interface user={user}/>
         
         {/* /api/v1/project/{projectId}/members */}
