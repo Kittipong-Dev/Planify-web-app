@@ -3,12 +3,16 @@ import React, { useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import Draggable from './DraggableTask'
 import Droppable from './DropZone';
-
+import labels from '../Config/LabelColors'
 import '/styles/list.css';
+import TaskPopup from './Tasks/TaskPopup';
+import TaskDetails from './Tasks/TaskComponent';
 
-const List = ({ lists, setLists }) => {
+const List = ({ lists, setLists, members }) => {
   const [newListName, setNewListName] = useState('');
   const [isAddingList, setIsAddingList] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [popupFor, setPopupFor] = useState(0);
 
   const handleAddList = () => {
     if (newListName.trim() === '') {
@@ -31,17 +35,13 @@ const List = ({ lists, setLists }) => {
     setLists(lists.filter((list) => list.id !== id));
   };
 
-  const handleAddTask = (listId, taskName, suppressUpdate = false, dat = lists) => {
-    if (taskName.trim() === '') {
-      alert('Task name cannot be empty.');
-      return;
-    }
+  const handleAddTask = (listId, taskData, suppressUpdate = false, dat = lists) => {
 
     const result = dat.map((list) =>
       list.id === listId
         ? {
           ...list,
-          tasks: [...list.tasks, { id: Date.now(), name: taskName }],
+          tasks: [...list.tasks, { id: Date.now(), name: taskData }],
         }
         : list
     )
@@ -90,7 +90,10 @@ const List = ({ lists, setLists }) => {
 
   return (
     <>
-      
+      <TaskPopup isVisible={popupVisible}
+        onClose={() => setPopupVisible(false)}
+        onSave={(e) => handleAddTask(popupFor, e)}
+        members={members} />
       <div className="list-container">
         <DndContext onDragEnd={handleDragEnd}>
           {lists.map((list) => (
@@ -105,13 +108,19 @@ const List = ({ lists, setLists }) => {
 
                   {list.tasks.map((task) => (
                     <Draggable key={task.id} id={task.id}>
-                      {task.name}
+                      <TaskDetails
+                        taskName={task.name.name}
+                        startDate={task.name.startDate}
+                        dueDate={task.name.dueDate}
+                        users={task.name.assignedMember}
+                        color={labels[task.name.label].color}
+                      />
                     </Draggable>
                   ))}
 
                 </div>
 
-                <div className="add-task">
+                {/* <div className="add-task">
                   <input
                     type="text"
                     placeholder="New Task Name"
@@ -122,6 +131,14 @@ const List = ({ lists, setLists }) => {
                       }
                     }}
                   />
+                </div>*/}
+                <div className="add-task">
+                  <button
+                    type="text"
+                    placeholder="New Task Name"
+                    onClick={() => { setPopupVisible(true); setPopupFor(list.id) }}
+                  >New Task Name
+                  </button>
                 </div>
               </div>
             </Droppable>

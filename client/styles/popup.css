@@ -1,5 +1,5 @@
 /* Popup Styles */
-#popup-overlay, #task-popup-overlay, #project-popup-overlay {
+.popup-overlay, .task-popup-overlay, .project-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,12 +12,12 @@
   z-index: 999;
 }
 
-#popup-overlay:not(.hidden), #task-popup-overlay:not(.hidden), #project-popup-overlay:not(.hidden) {
+.popup-overlay:not(.hidden), .task-popup-overlay:not(.hidden), .project-popup-overlay:not(.hidden) {
   display: flex; /* Show the popup when it's not hidden */
 }
 
 /* Popup Content */
-#popup-content, #task-popup-content, #project-popup-content {
+.popup-content, .task-popup-content, .project-popup-content {
   position: relative;
   background-color: #33363B;
   padding: 2vh 2vw; /* Remove padding to align header and buttons */
@@ -75,7 +75,7 @@
 }
 
 /* Cancel Button Styling */
-.popup-buttons #cancel-button, .popup-buttons #cancel-task-button {
+.popup-buttons .cancel-button .save-button .popup-buttons .cancel-task-button {
   background-color: transparent;
   color: white;
   border: 1.5px solid transparent;

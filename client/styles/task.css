@@ -1,5 +1,5 @@
 /* Task Popup Overlay */
-#task-popup-overlay {
+.task-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,14 +10,15 @@
   align-items: center;
   justify-content: center;
   z-index: 1000; /* Above all other elements */
+  
 }
 
-#task-popup-overlay:not(.hidden) {
+.task-popup-overlay:not(.hidden) {
   display: flex;
 }
 
 /* Task Popup Content */
-#task-popup-content {
+.task-popup-content {
   background-color: #33363B;
   padding: 0; /* Remove padding to align header and buttons */
   border-radius: 12px;
@@ -32,7 +33,7 @@
 
 
 /* Popup Body (Scrollable) */
-#popup-body {
+.popup-body {
   position: relative;
   flex: 1;
   top: -30px;
@@ -41,16 +42,16 @@
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-#popup-body::-webkit-scrollbar {
+.popup-body::-webkit-scrollbar {
   width: 8px; /* Optional scrollbar width */
 }
 
-#popup-body::-webkit-scrollbar-thumb {
+.popup-body::-webkit-scrollbar-thumb {
   background-color: #6D7276; /* Scrollbar thumb color */
   border-radius: 4px;
 }
 
-#popup-body::-webkit-scrollbar-track {
+.popup-body::-webkit-scrollbar-track {
   background-color: #3A3E42; /* Scrollbar track color */
 }
 
@@ -61,9 +62,10 @@
   top: 7px;
   z-index: 2;
   margin-top: 3.5vh;
+  border-radius: 12px;
 }
 
-#header-title {
+.header-title {
   font-size: calc(1.8vw) !important;
   margin-left: 3vw; /* Adjust alignment */
   letter-spacing: 1px;
@@ -86,7 +88,7 @@
 .form-group button {
   width: 100%;
   padding: 10px;
-  border: 1px solid #6d7276;
+  border: 1px solid .6d7276;
   border-radius: 8px;
   background-color: #3a3e42;
   color: white;
@@ -100,7 +102,7 @@
 .form-group button {
   background-color: transparent;
   cursor: pointer;
-  border: 1px solid #6d7276;
+  border: 1px solid .6d7276;
 }
 
 .form-group button:hover {
@@ -119,7 +121,7 @@
   width: 48%; /* Half of the container width */
 }
 
-#start-date-button, #due-date-button {
+.start-date-button, .due-date-button {
   position: relative;
   left: 20px;
   margin-bottom: 25px;
@@ -138,7 +140,7 @@
   text-align: center;
 }
 
-#start-date-button:hover, #due-date-button:hover {
+.start-date-button:hover, .due-date-button:hover {
   background-color: #44484F; /* Slightly darker background on hover */
 }
 
@@ -183,7 +185,7 @@
   letter-spacing: 1px;
 }
 
-#add-file-button {
+.add-file-button {
   position: relative;
   background-color: transparent;
   color: #949AA0;
@@ -196,7 +198,7 @@
   margin-bottom: 25px;
 }
 
-#add-file-button:hover {
+.add-file-button:hover {
   background-color: #44484F;
 }
 
@@ -220,7 +222,7 @@
   position: relative;
   background-color: transparent;
   color: #949AA0;
-  border: 1.5px solid #949AA0;
+  border: 1.5px solid .949AA0;
   border-radius: 12px;
   padding: 8px 16px;
   cursor: pointer;
@@ -281,4 +283,56 @@
   font-size: 12px;
   cursor: pointer;
   z-index: 1; /* Ensure it stays above the file name */
+}
+
+.task-card {
+  border-radius: 9px;
+  background-color: rgba(72, 78, 85, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 0;
+}
+.blue-bar {
+  background-color: rgb(72, 82, 88);
+  width: 46px;
+  height: 8px;
+  align-self: flex-end;
+}
+.task-details {
+  display: flex;
+  flex-direction: column;
+  padding: 0 23px;
+}
+.title {
+  color: rgba(246, 246, 246, 1);
+  font: 400 16px Inter, sans-serif;
+}
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.date-range {
+  color: rgba(148, 154, 160, 1);
+  font: 400 14px Inter, sans-serif;
+}
+.user-profiles {
+  display: flex;
+  gap: 5px;
+}
+.user-profile {
+  background-color: rgba(217, 217, 217, 1);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+button {
+  background-color: transparent;
+  color: white;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  font-size: 1.2vh;
+  padding: 0.5vh 2vw; /* Adjusted padding */
+  cursor: pointer;
 }

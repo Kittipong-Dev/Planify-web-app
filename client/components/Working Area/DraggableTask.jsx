@@ -1,15 +1,18 @@
 import React from 'react';
-import {useDraggable} from '@dnd-kit/core';
-import {CSS} from '@dnd-kit/utilities';
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 
 function Draggable(props) {
-  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: props.id,
   });
   const style = {
     // Outputs `translate3d(x, y, 0)`
     transform: CSS.Translate.toString(transform),
     "z-index": 100,
+    background: 'transparent', /* Makes the background invisible */
+    padding: 0, /* No padding */
+    margin: 0,
   };
   console.log(props)
 

@@ -1,7 +1,7 @@
 // Task.js (React Component)
 import React, { useState } from 'react';
-import TaskLabel from './client/components/TaskLabel';
-import Member from './client/components/Member';
+import TaskLabel from './TaskLabel';
+import Member from './Member';
 import '/styles/popup.css';
 import '/styles/task.css';
 
@@ -52,9 +52,6 @@ const TaskPopup = ({
       <div className="task-popup" onClick={(e) => e.stopPropagation()}>
         <div className="popup-header">
           <h3>Create Task</h3>
-          <button className="close-button" onClick={handleClose}>
-            ✖
-          </button>
         </div>
 
         <div className="popup-body">
@@ -78,31 +75,29 @@ const TaskPopup = ({
           </div>
 
           <div className="form-group date-inputs">
-            <div>
               <label>Start Date</label>
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
               />
-            </div>
-
-            <div>
+          </div>
+          <div className="form-group date-inputs">
               <label>Due Date</label>
               <input
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
               />
-            </div>
           </div>
 
           <div className="form-group">
             <label>Assigned Member</label>
             <Member
-              members={members}
+              members={members.members}
               selectedMember={assignedMember}
-              onSelectMember={setAssignedMember}
+              onMemberSelect={setAssignedMember}
+              isVisible={true}
             />
           </div>
 
@@ -110,7 +105,8 @@ const TaskPopup = ({
             <label>Task Label</label>
             <TaskLabel
               selectedLabel={selectedLabel}
-              onSelectLabel={setSelectedLabel}
+              setSelectedLabel={setSelectedLabel}
+              isVisible={true}
             />
           </div>
         </div>

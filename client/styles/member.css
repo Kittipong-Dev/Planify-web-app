@@ -43,6 +43,10 @@
     background-color: #f0f8ff;
 }
 
+.selected-member-option {
+    background-color: #a6c5e0;
+}
+
 .member-profile-picture {
     width: 40px;
     height: 40px;

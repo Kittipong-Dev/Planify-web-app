@@ -8,7 +8,7 @@ import List from '../Working Area/List'
 import TopBarBoardPanel from '../Working Area/TopBarBoardPanel'
 
 //good job
-const BoardProject = () => {
+const BoardProject = (members) => {
   const [isBoardVisible, setIsBoardVisible] = useState(true);
 
   // Store boards and active board
@@ -92,13 +92,14 @@ const BoardProject = () => {
     }
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetchData()
   }, []) // on load
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetchData()
   }, [activeBoard,activeProject]) // on load
+  */
 
   useEffect(() => {
     // First, we need to create an instance of EventSource and pass the data stream URL as a
@@ -223,7 +224,9 @@ const BoardProject = () => {
                     }
                     return K
                   }
+                  
                   )}
+                  members={members}
                 />
               </>
             ) : (

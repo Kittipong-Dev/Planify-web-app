@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DiscordSDK } from '@discord/embedded-app-sdk';
 import Interface from '../Interface.jsx';
-import Calendar from '../Misc/Calendar.jsx';
-import Task from '../../../Task.jsx';
-import SettingsPopup from '../Settings.jsx';
-import ConfirmationPopup from '../ConfirmationPopup.jsx';
-import TaskLabel from '../TaskLabel.jsx';
 import BoardProject from '../Boards/BoardProject.jsx';
-import List from '../Working Area/List.jsx';
-import Member from '../Member.jsx';
 import ErrorBoundary from '/ErrorBoundary.jsx';
 import '/styles/sidebar.css';
 
@@ -114,11 +107,10 @@ const Project = () => {
     <div id="app">
       <ErrorBoundary>
         <Interface user={user}/>
-        <Task />
+        
 
-        <BoardProject />
+        <BoardProject  members={[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]}/>
         {/* Task List and Member Components */}
-        <Member members={[{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]} />
       </ErrorBoundary>
     </div>
   );

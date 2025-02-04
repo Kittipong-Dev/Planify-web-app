@@ -171,11 +171,10 @@
   outline: none;
 }
 
-.add-task > input{
-  background: transparent; 
+.add-task > button{
+  background: grey; 
   border: none; 
   color: white; 
-  width: 100px;
 }
 /* Add Task button inside the list */ /*note: unused*/
 .add-task-button {
